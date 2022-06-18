@@ -9,7 +9,7 @@ const PATHS = require('./paths');
 const config = (env, argv) =>
   merge(common, {
     entry: {
-      popup: PATHS.src + '/popup.ts',
+      popup: PATHS.src + '/popup/popup.ts',
       trelloCardNumberPlus: PATHS.src + '/trelloCardNumberPlus.ts',
     },
     devtool: argv.mode === 'production' ? false : 'source-map',

@@ -6,6 +6,7 @@ import {
   TCNP_NUMBER_CLASS_SELECTOR,
 } from './shared/const';
 import { Configs } from './shared/models';
+import { isCard, isDialogClosed, isDroppedCard } from './shared/mutationHelpers';
 import { configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
 
@@ -22,23 +23,19 @@ window.addEventListener('load', () => {
 function setupObserver(): void {
   var observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation) => {
-      mutation.addedNodes.forEach((n) => {
-        const element = n as HTMLElement;
+      const element = mutation.target as HTMLElement;
+      if (!element?.classList?.length) return;
 
-        // Every change involving an element without classes is ignored
-        if (!element?.classList?.length) return;
+      if (
+        (isCard(element) && (mutation.addedNodes.length > 0 || isDroppedCard(element, mutation))) ||
+        isDialogClosed(element, mutation)
+      ) {
+        setupNumbers();
+      }
 
-        const { classList } = element;
-
-        if (classList.contains('card-detail-window')) {
-          setupDialogNumber();
-        }
-
-        // Setup card number
-        if (classList.contains('list-card') || classList.contains('list-card-details')) {
-          setupNumbers({ parent: element });
-        }
-      });
+      if (element.classList.contains('card-detail-window')) {
+        setupDialogNumber();
+      }
     });
   });
 
@@ -46,6 +43,7 @@ function setupObserver(): void {
     attributes: true,
     childList: true,
     subtree: true,
+    attributeOldValue: true,
   });
 }
 
