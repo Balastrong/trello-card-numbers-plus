@@ -15,13 +15,19 @@
         <div class="config-row">
           <div class="config-label">Active</div>
           <div class="config-control">
-            <input type="checkbox" id="card-numbers-active" />
+            <label class="switch">
+              <input type="checkbox" id="card-numbers-active" />
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
         <div class="config-row">
           <div class="config-label">Bold</div>
           <div class="config-control">
-            <input type="checkbox" id="card-numbers-bold" />
+            <label class="switch">
+              <input type="checkbox" id="card-numbers-bold" />
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -29,14 +35,9 @@
         <div class="config-label"></div>
         <div class="config-control"></div>
       </div>
-      <div class="button-row"></div>
-      <div class="buttons">
-        <button id="save-button">Save</button>
-        <button id="cancel-button">Cancel</button>
-      </div>
-      <div style="display: flex">
-        <input type="checkbox" id="close-on-save" />
-        <div>Close on save</div>
+      <div class="buttons-row">
+        <button class="button confirm" id="save-button">Save</button>
+        <button class="button cancel" id="close-button">Close</button>
       </div>
     </div>
 

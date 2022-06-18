@@ -8,7 +8,6 @@ function loadConfigs() {
   configStorage.get((configs) => {
     getCheckbox(Controls.CardNumbersActive).checked = configs.cardNumbersActive;
     getCheckbox(Controls.CardNumbersBold).checked = configs.cardNumbersBold;
-    getCheckbox(Controls.CloseOnSave).checked = configs.closeOnSave;
   });
 }
 
@@ -16,13 +15,8 @@ function saveConfig(): void {
   const configs = new Configs();
   configs.cardNumbersActive = getCheckbox(Controls.CardNumbersActive).checked;
   configs.cardNumbersBold = getCheckbox(Controls.CardNumbersBold).checked;
-  configs.closeOnSave = getCheckbox(Controls.CloseOnSave).checked;
 
-  configStorage.set(configs, () => {
-    if (configs.closeOnSave) {
-      window.close();
-    }
-  });
+  configStorage.set(configs);
 }
 //#endregion
 
@@ -44,4 +38,4 @@ function getControl<T extends HTMLElement>(control: Controls): T {
 
 document.addEventListener('DOMContentLoaded', () => loadConfigs());
 document.getElementById('save-button')?.addEventListener('click', () => saveConfig());
-document.getElementById('cancel-button')?.addEventListener('click', () => window.close());
+document.getElementById('close-button')?.addEventListener('click', () => window.close());

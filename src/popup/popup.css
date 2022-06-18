@@ -8,9 +8,18 @@
 }
 /* normalize css ends here */
 
+/*
+  ================================================================================
+  CORE CSS
+  ================================================================================
+*/
+
 body {
   max-height: 700px;
   width: 30em;
+  font-size: 14px;
+  background-color: #9fd4ff;
+  border-radius: 25px;
 }
 
 button {
@@ -39,10 +48,12 @@ button {
 
 .config-section {
   width: 100%;
+  font-size: 1.25em;
 }
 
 .config-section-title {
   font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 .config-row {
@@ -52,10 +63,136 @@ button {
   margin-bottom: 1em;
 }
 
-.config-row div {
+.config-row .config-label,
+.config-row .config-control {
   flex: 1;
+  padding: 0 2em;
 }
 
-#save-button {
-  margin-bottom: 1em;
+.config-label {
+  text-align: right;
+}
+
+.config-control {
+  text-align: left;
+}
+
+.buttons-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1em;
+  width: 100%;
+}
+
+.buttons-row button {
+  width: 33%;
+  padding: 0, 5em;
+}
+
+/*
+  ================================================================================
+  SWITCH
+  ================================================================================
+*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2.2em;
+  height: 1.2em;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 1em;
+  width: 1em;
+  left: 0.1em;
+  bottom: 0.1em;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(1em);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/*
+  ================================================================================
+  BUTTON
+  ================================================================================
+*/
+
+.button {
+  display: inline-block;
+  padding: 0.3em 0.5em;
+  font-size: 1.3em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0.4em #999;
+  margin-bottom: 0.4em;
+}
+
+.button:active {
+  box-shadow: 0 0.32em #666;
+  transform: translateY(4px);
+}
+
+.button.confirm {
+  background-color: #4caf50;
+}
+
+.button.confirm:hover,
+.button.confirm:active {
+  background-color: #3e8e41;
+}
+
+.button.cancel {
+  background-color: #f4511e;
+}
+
+.button.cancel:hover,
+.button.cancel:active {
+  background-color: #d04116;
 }

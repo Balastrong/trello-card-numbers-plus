@@ -6,9 +6,9 @@ export const configStorage = {
       callback(storage.configs);
     });
   },
-  set: (configs: Configs, callback: () => void) => {
+  set: (configs: Configs, callback?: () => void) => {
     chrome.storage.sync.set({ configs }, () => {
-      callback();
+      callback?.();
     });
   },
   listen: (callback: (configs: Configs) => void) => {
