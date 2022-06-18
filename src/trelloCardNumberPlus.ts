@@ -10,15 +10,20 @@ import { isCard, isDialogClosed, isDroppedCard } from './shared/mutationHelpers'
 import { configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
 
-window.addEventListener('load', () => {
-  configStorage.listen((configs: Configs) => {
-    setupNumbers({ configs });
-  });
+let configs: Configs = new Configs();
 
-  setupNumbers();
-  setupDialogNumber();
+window.addEventListener('load', () => {
+  configStorage.get(refresh);
+  configStorage.listen(refresh);
+
   setupObserver();
 });
+
+function refresh(updatedConfigs: Configs): void {
+  configs = updatedConfigs;
+  setupNumbers();
+  setupDialogNumber();
+}
 
 function setupObserver(): void {
   var observer = new MutationObserver((mutations: MutationRecord[]) => {
@@ -62,26 +67,13 @@ function setupDialogNumber(): void {
   }
 }
 
-function setupNumbers(options?: { parent?: Element; configs?: Configs }): void {
-  function innerSetupNumbers(parent: Element, configs: Configs) {
-    parent.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
-      if (element) {
-        element.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive);
-        element.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
-      }
-    });
-  }
-
-  const parent = options?.parent || document.body;
-
-  // Avoid reading configs again if passed in input
-  if (options?.configs) {
-    innerSetupNumbers(parent, options.configs);
-  } else {
-    configStorage.get((configs) => {
-      innerSetupNumbers(parent, configs);
-    });
-  }
+function setupNumbers(): void {
+  document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
+    if (element) {
+      element.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive);
+      element.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
+    }
+  });
 }
 
 function getCurrentlyOpenCardNumber(): string | undefined {
