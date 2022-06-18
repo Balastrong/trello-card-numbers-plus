@@ -10,12 +10,12 @@ With card IDs it's much easier to refer to a specific card with your team and in
 
 - Show card ID on each card in the board
 - Show card ID in the dialog when a card is expanded
+- Toggle card ID display
 - Count cards for each list
 - Configs live reload
 
 ### Planned features
 
-- Toggle card ID display
 - Customize card ID display
 - Toggle cards count display
 - _...feel free to suggest a feature by opening an issue_
