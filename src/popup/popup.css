@@ -90,6 +90,14 @@ button {
   padding: 0, 5em;
 }
 
+input {
+  font-size: inherit;
+}
+
+#number-format {
+  width: 4em;
+}
+
 /*
   ================================================================================
   SWITCH

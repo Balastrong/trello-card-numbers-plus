@@ -1,4 +1,8 @@
-import { Configs } from './models';
+export class Configs {
+  cardNumbersActive: boolean = true;
+  cardNumbersBold: boolean = true;
+  numberFormat: string = '#%0';
+}
 
 export const configStorage = {
   get: (callback: (configs: Configs) => void) => {

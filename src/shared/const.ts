@@ -2,6 +2,7 @@
 export const TCNP_NUMBER_CLASS = 'tcnp-card-number';
 export const TCNP_NUMBER_CLASS_BOLD = TCNP_NUMBER_CLASS + '-bold';
 export const TCNP_NUMBER_CLASS_SELECTOR = '.' + TCNP_NUMBER_CLASS;
+export const TCNP_NUMBER_FORMAT_PLACEHOLDER = '%0';
 //#endregion
 
 //#region Trello Constants
