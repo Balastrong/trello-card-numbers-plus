@@ -4,7 +4,7 @@ import {
   TCNP_NUMBER_CLASS,
   TCNP_NUMBER_CLASS_BOLD,
   TCNP_NUMBER_CLASS_SELECTOR,
-} from './const';
+} from './shared/const';
 import { Configs } from './shared/models';
 import { configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';

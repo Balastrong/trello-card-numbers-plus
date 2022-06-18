@@ -1,6 +1,6 @@
 import './popup.css';
-import { Configs } from './shared/models';
-import { configStorage } from './shared/storage';
+import { Configs } from '../shared/models';
+import { configStorage } from '../shared/storage';
 
 //#region Configs logic
 
