@@ -9,9 +9,6 @@
     "48": "icons/icon_48.png",
     "128": "icons/icon_128.png"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
     "default_title": "Trello Card Numbers Plus",
     "default_popup": "popup.html"
@@ -20,8 +17,8 @@
   "content_scripts": [
     {
       "matches": ["https://trello.com/*"],
-      "js": ["trello-card-number-plus.js"],
-      "css": ["trello-card-number-plus.css"]
+      "js": ["trelloCardNumberPlus.js"],
+      "css": ["trelloCardNumberPlus.css"]
     }
   ]
 }

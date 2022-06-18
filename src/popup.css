@@ -9,8 +9,12 @@
 /* normalize css ends here */
 
 body {
-  height: 200px;
-  width: 200px;
+  max-height: 700px;
+  width: 30em;
+}
+
+button {
+  padding: 0.3em;
 }
 
 .content {
@@ -19,4 +23,39 @@ body {
   justify-content: center;
   height: 100%;
   text-align: center;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.5em;
+  font-style: italic;
+}
+
+.config-section {
+  width: 100%;
+}
+
+.config-section-title {
+  font-weight: bold;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 1em;
+}
+
+.config-row div {
+  flex: 1;
+}
+
+#save-button {
+  margin-bottom: 1em;
 }

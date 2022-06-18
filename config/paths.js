@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
-const path = require('path')
+const path = require('path');
 
 const PATHS = {
   src: path.resolve(__dirname, '../src'),
   build: path.resolve(__dirname, '../build'),
-}
+};
 
-module.exports = PATHS
+module.exports = PATHS;

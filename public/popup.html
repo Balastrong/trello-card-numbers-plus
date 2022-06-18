@@ -7,7 +7,37 @@
   </head>
   <body>
     <div class="content">
-      <h2>Configuration will be available soon!</h2>
+      <div class="title">Trello Card Numbers Plus</div>
+      <div class="subtitle">Configurations</div>
+      <br />
+      <div class="config-section">
+        <div class="config-section-title">Card Numbers</div>
+        <div class="config-row">
+          <div class="config-label">Active</div>
+          <div class="config-control">
+            <input type="checkbox" id="card-numbers-active" />
+          </div>
+        </div>
+        <div class="config-row">
+          <div class="config-label">Bold</div>
+          <div class="config-control">
+            <input type="checkbox" id="card-numbers-bold" />
+          </div>
+        </div>
+      </div>
+      <div class="config-row">
+        <div class="config-label"></div>
+        <div class="config-control"></div>
+      </div>
+      <div class="button-row"></div>
+      <div class="buttons">
+        <button id="save-button">Save</button>
+        <button id="cancel-button">Cancel</button>
+      </div>
+      <div style="display: flex">
+        <input type="checkbox" id="close-on-save" />
+        <div>Close on save</div>
+      </div>
     </div>
 
     <script src="popup.js"></script>

@@ -1,9 +1,12 @@
 .list-header-num-cards.hide,
-.card-short-id.hide {
+.tcnp-card-number {
   display: inline !important;
 }
 
-.card-short-id.hide {
+.tcnp-card-number {
   margin-right: 0.3em !important;
+}
+
+.tcnp-card-number-bold {
   font-weight: bold;
 }
