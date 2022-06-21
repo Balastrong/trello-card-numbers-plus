@@ -5,7 +5,6 @@ import { formatNumber } from '../shared/utils';
 import { TCNP_NUMBER_CLASS_BOLD } from '../shared/const';
 
 //#region Configs logic
-
 function loadConfigs() {
   configStorage.get((configs) => {
     getInput(Controls.CardNumbersActive).checked = configs.cardNumbersActive;

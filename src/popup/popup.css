@@ -19,7 +19,6 @@ body {
   width: 30em;
   font-size: 14px;
   background-color: #9fd4ff;
-  border-radius: 25px;
 }
 
 button {
@@ -34,6 +33,7 @@ button {
   text-align: center;
   flex-direction: column;
   padding: 1em;
+  border: 0.25em solid black;
 }
 
 .title {
