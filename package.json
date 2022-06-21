@@ -1,7 +1,7 @@
 {
   "name": "trello-card-numbers-plus",
-  "version": "0.1.1",
-  "description": "A fully customizable Chrome extension to provide more data in your Trello boards with cards",
+  "version": "1.0.1",
+  "description": "Adds card numbers on Trello and more!",
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
