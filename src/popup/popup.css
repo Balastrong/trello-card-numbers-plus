@@ -67,6 +67,7 @@ button {
 }
 
 .config-label {
+  font-weight: bold;
   flex: 1;
 }
 

@@ -66,6 +66,7 @@ function setupDialogNumber(): void {
     const cardNumber = getCardNumberFromURL(window.location.pathname);
     const numberSpan = document.createElement('h2');
     numberSpan.innerHTML = formatNumber(cardNumber, configs.numberFormat);
+    numberSpan.style.color = configs.numberColor;
     numberSpan.classList.add(TCNP_NUMBER_CLASS, 'quiet');
 
     title.parentElement?.prepend(numberSpan);
@@ -74,10 +75,12 @@ function setupDialogNumber(): void {
 
 function setupNumbers(): void {
   document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
-    if (element) {
-      element.innerHTML = formatNumber(getCardNumberFromParent(element), configs.numberFormat);
-      element.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive);
-      element.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
+    const htmlElement = element as HTMLElement;
+    if (htmlElement) {
+      htmlElement.innerHTML = formatNumber(getCardNumberFromParent(element), configs.numberFormat);
+      htmlElement.style.color = configs.numberColor;
+      htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive);
+      htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
     }
   });
 }
