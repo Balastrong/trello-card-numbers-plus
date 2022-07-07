@@ -32,7 +32,7 @@ function refresh(updatedConfigs: Configs): void {
 }
 
 function setupObserver(): void {
-  var observer = new MutationObserver((mutations: MutationRecord[]) => {
+  const observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation) => {
       const element = mutation.target as HTMLElement;
       if (!element?.classList?.length) return;

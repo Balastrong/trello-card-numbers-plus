@@ -1,8 +1,8 @@
 export class Configs {
-  cardNumbersActive: boolean = true;
-  cardNumbersBold: boolean = true;
-  numberFormat: string = '#%0';
-  numberColor: string = '#000';
+  cardNumbersActive = true;
+  cardNumbersBold = true;
+  numberFormat = '#%0';
+  numberColor = '#000';
 }
 
 export const configStorage = {
