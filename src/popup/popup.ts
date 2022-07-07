@@ -9,7 +9,7 @@ new Huebee('#number-color', {
   saturations: 1,
   customColors: ['#C25', '#E62', '#EA0', '#19F', '#333'],
   staticOpen: true,
-}).on('change', (color: string) => {
+}).on('change', () => {
   updatePreview();
 });
 

@@ -5,14 +5,24 @@
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
-    "build": "webpack --mode=production --config config/webpack.config.js"
+    "build": "webpack --mode=production --config config/webpack.config.js",
+    "prettier": "prettier",
+    "prettier:check": "prettier --check src/**/*{.ts,.css,.html} public/**/*{.ts,.css,.html} --no-error-on-unmatched-pattern",
+    "prettier:fix": "prettier --write src/**/*{.ts,.css,.html} public/**/*{.ts,.css,.html} --no-error-on-unmatched-pattern",
+    "eslint:check": "eslint --ext .ts ./src",
+    "check": "npm run prettier:check && npm run eslint:check"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.190",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "prettier": "^2.7.1",
     "ts-loader": "^9.3.0",
     "typescript": "^4.7.3",
     "webpack": "^5.73.0",
