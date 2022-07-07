@@ -2,6 +2,7 @@ export class Configs {
   cardNumbersActive: boolean = true;
   cardNumbersBold: boolean = true;
   numberFormat: string = '#%0';
+  numberColor: string = '#000';
 }
 
 export const configStorage = {

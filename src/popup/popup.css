@@ -1,3 +1,5 @@
+@import '~huebee/huebee.css';
+
 /* normalize css starts here */
 *,
 *::before,
@@ -49,6 +51,7 @@ button {
 .config-section {
   width: 100%;
   font-size: 1.25em;
+  margin-bottom: 1em;
 }
 
 .config-section-title {
@@ -63,18 +66,13 @@ button {
   margin-bottom: 1em;
 }
 
-.config-row .config-label,
-.config-row .config-control {
-  flex: 1;
-  padding: 0 2em;
-}
-
 .config-label {
-  text-align: right;
+  font-weight: bold;
+  flex: 1;
 }
 
 .config-control {
-  text-align: left;
+  flex: 2;
 }
 
 .buttons-row {
@@ -96,6 +94,12 @@ input {
 
 #number-format {
   width: 4em;
+}
+
+#number-format-preview {
+  background: white;
+  padding: 0.25em;
+  border-radius: 0.4em;
 }
 
 /*
