@@ -21,6 +21,7 @@ This extension provides full customization of the card numbers, have a look!
 - Toggle card ID display
 - Count cards for each list
 - Configs live reload
+- Customize colors
 
 ### Planned features
 
