@@ -7,7 +7,20 @@ import Huebee from 'huebee';
 
 new Huebee('#number-color', {
   saturations: 1,
-  customColors: ['#C25', '#E62', '#EA0', '#19F', '#333'],
+  customColors: [
+    '#ff0000',
+    '#ff7f00',
+    '#ffff00',
+    '#7fff00',
+    '#00ff00',
+    '#00ff7f',
+    '#00ffff',
+    '#007fff',
+    '#0000ff',
+    '#7f00ff',
+    '#ff00ff',
+    '#ff0088',
+  ],
   staticOpen: true,
 }).on('change', () => {
   updatePreview();
