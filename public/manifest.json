@@ -18,7 +18,8 @@
     {
       "matches": ["https://trello.com/*"],
       "js": ["trelloCardNumberPlus.js"],
-      "css": ["trelloCardNumberPlus.css"]
+      "css": ["trelloCardNumberPlus.css"],
+      "all_frames": true
     }
   ]
 }
