@@ -12,6 +12,7 @@ import {
   isCard,
   isDialogClosed,
   isDroppedCard,
+  isAddedCard,
 } from './shared/utils';
 import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
@@ -39,7 +40,8 @@ function setupObserver(): void {
 
       if (
         (isCard(element) && (mutation.addedNodes.length > 0 || isDroppedCard(element, mutation))) ||
-        isDialogClosed(element, mutation)
+        isDialogClosed(element, mutation) ||
+        isAddedCard(element, mutation)
       ) {
         setupNumbers();
       }
