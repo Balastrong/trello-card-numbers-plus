@@ -12,6 +12,10 @@ export function isDialogClosed(element: Element, mutation: MutationRecord): bool
   return element.classList.contains('window-wrapper') && mutation.removedNodes.length > 0;
 }
 
+export function isAddedCard(element: Element, mutation: MutationRecord): boolean {
+  return mutation.removedNodes?.length > 0 && element.classList.contains('js-menu-action-list');
+}
+
 export function formatNumber(cardNumber: number, numberFormat: string): string {
   if (isNaN(cardNumber)) return '';
 
