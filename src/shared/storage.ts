@@ -3,6 +3,7 @@ export class Configs {
   cardNumbersBold = true;
   numberFormat = '#%0';
   numberColor = '#000';
+  blacklist = '';
 }
 
 export const configStorage = {
