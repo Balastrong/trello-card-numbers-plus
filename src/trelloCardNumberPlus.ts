@@ -28,6 +28,10 @@ window.addEventListener('load', () => {
 
 function refresh(updatedConfigs: Configs): void {
   configs = updatedConfigs;
+
+  const currentBoard = window.location.pathname.split('/')[2];
+  if (configs.blacklist === currentBoard) return;
+
   setupNumbers();
   setupDialogNumber();
 }

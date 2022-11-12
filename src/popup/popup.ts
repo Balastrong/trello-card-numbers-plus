@@ -33,6 +33,7 @@ function loadConfigs() {
     getInput(Controls.CardNumbersBold).checked = configs.cardNumbersBold;
     getInput(Controls.NumberFormat).value = configs.numberFormat;
     getInput(Controls.NumberColor).value = configs.numberColor;
+    getInput(Controls.Blacklist).value = configs.blacklist;
     updatePreview();
   });
 }
@@ -43,6 +44,7 @@ function saveConfig(): void {
   configs.cardNumbersBold = getInput(Controls.CardNumbersBold).checked;
   configs.numberFormat = getInput(Controls.NumberFormat).value;
   configs.numberColor = getInput(Controls.NumberColor).value;
+  configs.blacklist = getInput(Controls.Blacklist).value;
 
   configStorage.set(configs);
 }
@@ -54,6 +56,7 @@ enum Controls {
   CardNumbersBold = 'card-numbers-bold',
   NumberFormat = 'number-format',
   NumberColor = 'number-color',
+  Blacklist = 'blacklist',
 }
 
 function getInput(control: Controls) {
