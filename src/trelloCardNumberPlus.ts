@@ -30,7 +30,8 @@ function refresh(updatedConfigs: Configs): void {
   configs = updatedConfigs;
 
   const currentBoard = window.location.pathname.split('/')[2];
-  if (configs.blacklist === currentBoard) return;
+  const blacklistedBoards = configs.blacklist.split(';').map((ids) => ids.trim());
+  if (blacklistedBoards.includes(currentBoard)) return;
 
   setupNumbers();
   setupDialogNumber();
