@@ -14,7 +14,6 @@ import {
   isDroppedCard,
   isAddedCard,
   isBlacklisted,
-  getCurrentBoardId,
 } from './shared/utils';
 import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
@@ -27,6 +26,10 @@ window.addEventListener('load', () => {
 
   setupObserver();
 });
+
+function getCurrentBoardId() {
+  return window.location.pathname.split('/')[2];
+}
 
 function refresh(updatedConfigs: Configs): void {
   configs = updatedConfigs;

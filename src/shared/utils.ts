@@ -36,7 +36,3 @@ export function isBlacklisted(blacklist: string, boardId: string) {
   const blacklistedBoards = blacklist.split(';').map((ids) => ids.trim());
   return blacklistedBoards.includes(boardId);
 }
-
-export function getCurrentBoardId() {
-  return window.location.pathname.split('/')[2];
-}
