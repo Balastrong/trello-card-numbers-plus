@@ -31,3 +31,8 @@ export function getCardNumberFromParent(element: Element): number {
   const url = element.closest('a')?.href ?? '';
   return getCardNumberFromURL(url);
 }
+
+export function isBlacklisted(blacklist: string, boardId: string) {
+  const blacklistedBoards = blacklist.split(';').map((ids) => ids.trim());
+  return blacklistedBoards.includes(boardId);
+}

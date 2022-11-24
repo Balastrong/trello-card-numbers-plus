@@ -1,7 +1,7 @@
 import './popup.css';
 import '../trelloCardNumberPlus.css';
 import { Configs, configStorage } from '../shared/storage';
-import { formatNumber } from '../shared/utils';
+import { formatNumber, isBlacklisted } from '../shared/utils';
 import { TCNP_NUMBER_CLASS_BOLD } from '../shared/const';
 import Huebee from 'huebee';
 
@@ -76,6 +76,36 @@ function updatePreview(): void {
 }
 //#endregion
 
+async function getCurrentBoardId() {
+  const queryOptions = { active: true, lastFocusedWindow: true };
+  const [tab] = await chrome.tabs.query(queryOptions);
+
+  return tab.url?.split('/b/')[1].split('/')[0] ?? 'not-found';
+}
+
+async function toggleCurrentBoardBlacklist() {
+  const currentBoard = await getCurrentBoardId();
+  const blacklist = getInput(Controls.Blacklist).value;
+  const blacklistButton = document.getElementById('blacklist-toggle-btn');
+
+  if (isBlacklisted(blacklist, currentBoard)) {
+    const filteredBlacklist = blacklist
+      .split(';')
+      .filter((boardId) => boardId.trim() !== currentBoard)
+      .join(';');
+    getInput(Controls.Blacklist).value = filteredBlacklist;
+
+    if (blacklistButton) {
+      blacklistButton.innerText = '(+)';
+    }
+  } else {
+    getInput(Controls.Blacklist).value = `${currentBoard};${blacklist}`;
+    if (blacklistButton) {
+      blacklistButton.innerText = '(-)';
+    }
+  }
+}
+
 //#region Listeners
 document.addEventListener('DOMContentLoaded', loadConfigs);
 document.getElementById('save-button')?.addEventListener('click', saveConfig);
@@ -83,4 +113,5 @@ document.getElementById('close-button')?.addEventListener('click', () => window.
 [getInput(Controls.NumberFormat), getInput(Controls.CardNumbersBold)].forEach((el) =>
   el.addEventListener('input', updatePreview)
 );
+document.getElementById('blacklist-toggle-btn')?.addEventListener('click', toggleCurrentBoardBlacklist);
 //#endregion

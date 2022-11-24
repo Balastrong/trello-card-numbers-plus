@@ -13,6 +13,7 @@ import {
   isDialogClosed,
   isDroppedCard,
   isAddedCard,
+  isBlacklisted,
 } from './shared/utils';
 import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
@@ -26,12 +27,16 @@ window.addEventListener('load', () => {
   setupObserver();
 });
 
+function getCurrentBoardId() {
+  return window.location.pathname.split('/')[2];
+}
+
 function refresh(updatedConfigs: Configs): void {
   configs = updatedConfigs;
 
-  const currentBoard = window.location.pathname.split('/')[2];
-  const blacklistedBoards = configs.blacklist.split(';').map((ids) => ids.trim());
-  if (blacklistedBoards.includes(currentBoard)) return;
+  const currentBoard = getCurrentBoardId();
+
+  if (isBlacklisted(configs.blacklist, currentBoard)) return;
 
   setupNumbers();
   setupDialogNumber();
