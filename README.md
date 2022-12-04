@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Balastrong/trello-card-numbers-plus/actions/workflows/check.yml"><img src="https://github.com/Balastrong/trello-card-numbers-plus/actions/workflows/check.yml/badge.svg" alt="Zod CI status" /></a>
+  <a href="https://github.com/Balastrong/trello-card-numbers-plus/actions/workflows/check.yml"><img src="https://github.com/Balastrong/trello-card-numbers-plus/actions/workflows/check.yml/badge.svg" alt="CI status" /></a>
+  <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store Version" src="https://img.shields.io/chrome-web-store/v/ncibjlmfhjcjnphnpphgphbflpdpliei?label=version"></a>
   <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img src="https://img.shields.io/github/stars/Balastrong/trello-card-numbers-plus" alt="Stars"></a>
-  <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/users/ncibjlmfhjcjnphnpphgphbflpdpliei"></a>
-  <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/rating/ncibjlmfhjcjnphnpphgphbflpdpliei"></a>
-  <a href="https://youtu.be/G-nZXr_Gs6o" rel="nofollow"><img alt="youTube video views" src="https://img.shields.io/youtube/views/G-nZXr_Gs6o?label=youtube%20views&style=flat"></a>
+  <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store Users" src="https://img.shields.io/chrome-web-store/users/ncibjlmfhjcjnphnpphgphbflpdpliei"></a>
+  <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store Rating" src="https://img.shields.io/chrome-web-store/rating/ncibjlmfhjcjnphnpphgphbflpdpliei"></a>
   <a href="https://leonardomontini.dev" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-Leonardo%20Montini-4BBAAB.svg" alt="created by Leonardo Montini"></a>
 </p>
 
