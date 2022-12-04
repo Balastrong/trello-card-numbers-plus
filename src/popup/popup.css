@@ -75,6 +75,11 @@ button {
   flex: 2;
 }
 
+.config-section button {
+  box-shadow: 0 0.25em #999;
+  font-size: 1.1rem;
+}
+
 .buttons-row {
   display: flex;
   flex-direction: row;
@@ -183,6 +188,7 @@ input:checked + .slider:before {
   border: none;
   border-radius: 15px;
   box-shadow: 0 0.4em #999;
+  margin-top: -0.1rem;
   margin-bottom: 0.4em;
 }
 
@@ -207,6 +213,10 @@ input:checked + .slider:before {
 .button.cancel:hover,
 .button.cancel:active {
   background-color: #d04116;
+}
+
+.button.add {
+  background-color: #2196f3;
 }
 
 .tooltip {

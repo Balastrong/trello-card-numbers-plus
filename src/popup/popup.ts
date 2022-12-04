@@ -35,6 +35,7 @@ function loadConfigs() {
     getInput(Controls.NumberColor).value = configs.numberColor;
     getInput(Controls.Blacklist).value = configs.blacklist;
     updatePreview();
+    updateBlacklistButtonText();
   });
 }
 
@@ -86,7 +87,6 @@ async function getCurrentBoardId() {
 async function toggleCurrentBoardBlacklist() {
   const currentBoard = await getCurrentBoardId();
   const blacklist = getInput(Controls.Blacklist).value;
-  const blacklistButton = document.getElementById('blacklist-toggle-btn');
 
   if (isBlacklisted(blacklist, currentBoard)) {
     const filteredBlacklist = blacklist
@@ -94,15 +94,21 @@ async function toggleCurrentBoardBlacklist() {
       .filter((boardId) => boardId.trim() !== currentBoard)
       .join(';');
     getInput(Controls.Blacklist).value = filteredBlacklist;
-
-    if (blacklistButton) {
-      blacklistButton.innerText = '(+)';
-    }
   } else {
     getInput(Controls.Blacklist).value = `${currentBoard};${blacklist}`;
-    if (blacklistButton) {
-      blacklistButton.innerText = '(-)';
-    }
+  }
+
+  updateBlacklistButtonText();
+}
+
+function updateBlacklistButtonText() {
+  const blacklistButton = document.getElementById('blacklist-toggle-btn');
+
+  if (blacklistButton) {
+    getCurrentBoardId().then((currentBoard) => {
+      const blacklist = getInput(Controls.Blacklist).value;
+      blacklistButton.innerText = isBlacklisted(blacklist, currentBoard) ? '(-)' : '(+)';
+    });
   }
 }
 
