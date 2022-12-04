@@ -1,7 +1,7 @@
 import './popup.css';
 import '../trelloCardNumberPlus.css';
 import { Configs, configStorage } from '../shared/storage';
-import { formatNumber, isBlacklisted } from '../shared/utils';
+import { formatNumber, isBoardExcluded } from '../shared/utils';
 import { TCNP_NUMBER_CLASS_BOLD } from '../shared/const';
 import Huebee from 'huebee';
 
@@ -33,8 +33,9 @@ function loadConfigs() {
     getInput(Controls.CardNumbersBold).checked = configs.cardNumbersBold;
     getInput(Controls.NumberFormat).value = configs.numberFormat;
     getInput(Controls.NumberColor).value = configs.numberColor;
-    getInput(Controls.Blacklist).value = configs.blacklist;
+    getInput(Controls.ExcludedBoards).value = configs.excludedBoards;
     updatePreview();
+    updateExcludedBoardsButtonText();
   });
 }
 
@@ -44,7 +45,7 @@ function saveConfig(): void {
   configs.cardNumbersBold = getInput(Controls.CardNumbersBold).checked;
   configs.numberFormat = getInput(Controls.NumberFormat).value;
   configs.numberColor = getInput(Controls.NumberColor).value;
-  configs.blacklist = getInput(Controls.Blacklist).value;
+  configs.excludedBoards = getInput(Controls.ExcludedBoards).value;
 
   configStorage.set(configs);
 }
@@ -56,7 +57,7 @@ enum Controls {
   CardNumbersBold = 'card-numbers-bold',
   NumberFormat = 'number-format',
   NumberColor = 'number-color',
-  Blacklist = 'blacklist',
+  ExcludedBoards = 'excludedBoards',
 }
 
 function getInput(control: Controls) {
@@ -83,26 +84,31 @@ async function getCurrentBoardId() {
   return tab.url?.split('/b/')[1].split('/')[0] ?? 'not-found';
 }
 
-async function toggleCurrentBoardBlacklist() {
+async function toggleCurrentBoardExcludedBoards() {
   const currentBoard = await getCurrentBoardId();
-  const blacklist = getInput(Controls.Blacklist).value;
-  const blacklistButton = document.getElementById('blacklist-toggle-btn');
+  const excludedBoards = getInput(Controls.ExcludedBoards).value;
 
-  if (isBlacklisted(blacklist, currentBoard)) {
-    const filteredBlacklist = blacklist
+  if (isBoardExcluded(excludedBoards, currentBoard)) {
+    const filteredExcludedBoards = excludedBoards
       .split(';')
       .filter((boardId) => boardId.trim() !== currentBoard)
       .join(';');
-    getInput(Controls.Blacklist).value = filteredBlacklist;
-
-    if (blacklistButton) {
-      blacklistButton.innerText = '(+)';
-    }
+    getInput(Controls.ExcludedBoards).value = filteredExcludedBoards;
   } else {
-    getInput(Controls.Blacklist).value = `${currentBoard};${blacklist}`;
-    if (blacklistButton) {
-      blacklistButton.innerText = '(-)';
-    }
+    getInput(Controls.ExcludedBoards).value = `${currentBoard};${excludedBoards}`;
+  }
+
+  updateExcludedBoardsButtonText();
+}
+
+function updateExcludedBoardsButtonText() {
+  const excludedBoardsButton = document.getElementById('excludedBoards-toggle-btn');
+
+  if (excludedBoardsButton) {
+    getCurrentBoardId().then((currentBoard) => {
+      const excludedBoards = getInput(Controls.ExcludedBoards).value;
+      excludedBoardsButton.innerText = isBoardExcluded(excludedBoards, currentBoard) ? '(-)' : '(+)';
+    });
   }
 }
 
@@ -113,5 +119,5 @@ document.getElementById('close-button')?.addEventListener('click', () => window.
 [getInput(Controls.NumberFormat), getInput(Controls.CardNumbersBold)].forEach((el) =>
   el.addEventListener('input', updatePreview)
 );
-document.getElementById('blacklist-toggle-btn')?.addEventListener('click', toggleCurrentBoardBlacklist);
+document.getElementById('excludedBoards-toggle-btn')?.addEventListener('click', toggleCurrentBoardExcludedBoards);
 //#endregion

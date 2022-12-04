@@ -13,7 +13,7 @@ import {
   isDialogClosed,
   isDroppedCard,
   isAddedCard,
-  isBlacklisted,
+  isBoardExcluded,
 } from './shared/utils';
 import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
@@ -36,7 +36,7 @@ function refresh(updatedConfigs: Configs): void {
 
   const currentBoard = getCurrentBoardId();
 
-  if (isBlacklisted(configs.blacklist, currentBoard)) return;
+  if (isBoardExcluded(configs.excludedBoards, currentBoard)) return;
 
   setupNumbers();
   setupDialogNumber();

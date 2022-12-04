@@ -75,6 +75,11 @@ button {
   flex: 2;
 }
 
+.config-section button {
+  box-shadow: 0 0.25em #999;
+  font-size: 1.1rem;
+}
+
 .buttons-row {
   display: flex;
   flex-direction: row;
@@ -93,7 +98,7 @@ input {
 }
 
 #number-format {
-  width: 4em;
+  text-align: center;
 }
 
 #number-format-preview {
@@ -183,6 +188,7 @@ input:checked + .slider:before {
   border: none;
   border-radius: 15px;
   box-shadow: 0 0.4em #999;
+  margin-top: -0.1rem;
   margin-bottom: 0.4em;
 }
 
@@ -209,6 +215,10 @@ input:checked + .slider:before {
   background-color: #d04116;
 }
 
+.button.add {
+  background-color: #2196f3;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -222,7 +232,7 @@ input:checked + .slider:before {
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 7px;
   position: absolute;
   z-index: 1;
   bottom: 125%;

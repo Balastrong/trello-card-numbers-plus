@@ -8,7 +8,7 @@
   <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/users/ncibjlmfhjcjnphnpphgphbflpdpliei"></a>
   <a href="https://chrome.google.com/webstore/detail/trello-card-numbers-plus/ncibjlmfhjcjnphnpphgphbflpdpliei" rel="nofollow"><img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/rating/ncibjlmfhjcjnphnpphgphbflpdpliei"></a>
   <a href="https://youtu.be/G-nZXr_Gs6o" rel="nofollow"><img alt="youTube video views" src="https://img.shields.io/youtube/views/G-nZXr_Gs6o?label=youtube%20views&style=flat"></a>
-  <a href="https://github.com/Balastrong" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-@Balastrong-4BBAAB.svg" alt="created by Leonardo Montini"></a>
+  <a href="https://leonardomontini.dev" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-Leonardo%20Montini-4BBAAB.svg" alt="created by Leonardo Montini"></a>
 </p>
 
 # Trello Card Numbers Plus
@@ -31,6 +31,7 @@ This extension provides full customization of the card numbers, have a look!
 - Count cards for each list
 - Configs live reload
 - Customize colors
+- Exclude some boards
 
 ### Planned features
 
