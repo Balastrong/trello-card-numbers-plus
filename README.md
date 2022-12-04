@@ -31,6 +31,7 @@ This extension provides full customization of the card numbers, have a look!
 - Count cards for each list
 - Configs live reload
 - Customize colors
+- Exclude some boards
 
 ### Planned features
 
