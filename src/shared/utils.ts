@@ -32,7 +32,7 @@ export function getCardNumberFromParent(element: Element): number {
   return getCardNumberFromURL(url);
 }
 
-export function isBlacklisted(blacklist: string, boardId: string) {
-  const blacklistedBoards = blacklist.split(';').map((ids) => ids.trim());
-  return blacklistedBoards.includes(boardId);
+export function isBoardExcluded(excludedBoards: string, boardId: string) {
+  const excludedBoardsedBoards = excludedBoards.split(';').map((ids) => ids.trim());
+  return excludedBoardsedBoards.includes(boardId);
 }
