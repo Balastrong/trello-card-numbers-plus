@@ -20,12 +20,9 @@ import './trelloCardNumberPlus.css';
 
 let configs: Configs = new Configs();
 
-window.addEventListener('load', () => {
-  configStorage.get(refresh);
-  configStorage.listen(refresh);
-
-  setupObserver();
-});
+configStorage.get(refresh);
+configStorage.listen(refresh);
+setupObserver();
 
 function getCurrentBoardId() {
   return window.location.pathname.split('/')[2];
@@ -46,12 +43,16 @@ function setupObserver(): void {
       const element = mutation.target as HTMLElement;
       if (!element?.classList?.length) return;
 
+      if (element.id === 'board') {
+        configStorage.get(refresh);
+      }
+
       if (
         (isCard(element) && (mutation.addedNodes.length > 0 || isDroppedCard(element, mutation))) ||
         isDialogClosed(element, mutation) ||
         isAddedCard(element, mutation)
       ) {
-        setupNumbers();
+        setupNumbers(isBoardExcluded(configs.excludedBoards, getCurrentBoardId()));
       }
 
       if (element.classList.contains('card-detail-window')) {
