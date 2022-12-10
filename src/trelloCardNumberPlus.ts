@@ -19,6 +19,7 @@ import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
 
 let configs: Configs = new Configs();
+let isCurrentBoardExcluded = false;
 
 configStorage.get(refresh);
 configStorage.listen(refresh);
@@ -28,12 +29,13 @@ function getCurrentBoardId() {
   return window.location.pathname.split('/')[2];
 }
 
-function refresh(updatedConfigs: Configs): void {
-  configs = updatedConfigs;
+function refresh(updatedConfigs?: Configs): void {
+  if (updatedConfigs) {
+    configs = updatedConfigs;
+  }
+  isCurrentBoardExcluded = isBoardExcluded(configs.excludedBoards, getCurrentBoardId());
 
-  const currentBoard = getCurrentBoardId();
-
-  setupNumbers(isBoardExcluded(configs.excludedBoards, currentBoard));
+  setupNumbers();
   setupDialogNumber();
 }
 
@@ -41,18 +43,20 @@ function setupObserver(): void {
   const observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation) => {
       const element = mutation.target as HTMLElement;
-      if (!element?.classList?.length) return;
 
+      // Board has been changed
       if (element.id === 'board') {
-        configStorage.get(refresh);
+        refresh();
       }
+
+      if (!element?.classList?.length) return;
 
       if (
         (isCard(element) && (mutation.addedNodes.length > 0 || isDroppedCard(element, mutation))) ||
         isDialogClosed(element, mutation) ||
         isAddedCard(element, mutation)
       ) {
-        setupNumbers(isBoardExcluded(configs.excludedBoards, getCurrentBoardId()));
+        setupNumbers();
       }
 
       if (element.classList.contains('card-detail-window')) {
@@ -84,13 +88,13 @@ function setupDialogNumber(): void {
   }
 }
 
-function setupNumbers(isBoardExcluded = false): void {
+function setupNumbers(): void {
   document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
     const htmlElement = element as HTMLElement;
     if (htmlElement) {
       htmlElement.innerHTML = formatNumber(getCardNumberFromParent(element), configs.numberFormat);
       htmlElement.style.color = configs.numberColor;
-      htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive && !isBoardExcluded);
+      htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive && !isCurrentBoardExcluded);
       htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
     }
   });
