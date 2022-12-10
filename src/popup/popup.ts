@@ -29,6 +29,7 @@ new Huebee('#number-color', {
 //#region Configs logic
 function loadConfigs() {
   configStorage.get((configs) => {
+    getInput(Controls.CardCountersActive).checked = configs.cardCountersActive;
     getInput(Controls.CardNumbersActive).checked = configs.cardNumbersActive;
     getInput(Controls.CardNumbersBold).checked = configs.cardNumbersBold;
     getInput(Controls.NumberFormat).value = configs.numberFormat;
@@ -41,6 +42,7 @@ function loadConfigs() {
 
 function saveConfig(): void {
   const configs = new Configs();
+  configs.cardCountersActive = getInput(Controls.CardCountersActive).checked;
   configs.cardNumbersActive = getInput(Controls.CardNumbersActive).checked;
   configs.cardNumbersBold = getInput(Controls.CardNumbersBold).checked;
   configs.numberFormat = getInput(Controls.NumberFormat).value;
@@ -53,6 +55,7 @@ function saveConfig(): void {
 
 //#region DOM Utilities
 enum Controls {
+  CardCountersActive = 'card-counters-active',
   CardNumbersActive = 'card-numbers-active',
   CardNumbersBold = 'card-numbers-bold',
   NumberFormat = 'number-format',

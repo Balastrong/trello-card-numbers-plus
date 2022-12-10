@@ -1,4 +1,5 @@
 export class Configs {
+  cardCountersActive = true;
   cardNumbersActive = true;
   cardNumbersBold = true;
   numberFormat = '#%0';

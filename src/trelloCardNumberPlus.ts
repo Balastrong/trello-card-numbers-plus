@@ -1,6 +1,7 @@
 import {
   CARD_SHORT_ID_SELECTOR,
   CARD_TITLE_SELECTOR,
+  CARD_COUNTER_SELECTOR,
   TCNP_NUMBER_CLASS,
   TCNP_NUMBER_CLASS_BOLD,
   TCNP_NUMBER_CLASS_SELECTOR,
@@ -35,6 +36,7 @@ function refresh(updatedConfigs?: Configs): void {
   }
   isCurrentBoardExcluded = isBoardExcluded(configs.excludedBoards, getCurrentBoardId());
 
+  setupCounters();
   setupNumbers();
   setupDialogNumber();
 }
@@ -56,6 +58,7 @@ function setupObserver(): void {
         isDialogClosed(element, mutation) ||
         isAddedCard(element, mutation)
       ) {
+        setupCounters();
         setupNumbers();
       }
 
@@ -97,5 +100,14 @@ function setupNumbers(): void {
       htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive && !isCurrentBoardExcluded);
       htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
     }
+  });
+}
+
+function setupCounters(): void {
+  document.querySelectorAll(CARD_COUNTER_SELECTOR).forEach((element) => {
+    const htmlElement = element as HTMLElement;
+    if (!htmlElement) return;
+
+    htmlElement.classList.toggle('hide', !configs.cardCountersActive);
   });
 }
