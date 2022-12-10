@@ -36,9 +36,7 @@ function refresh(updatedConfigs: Configs): void {
 
   const currentBoard = getCurrentBoardId();
 
-  if (isBoardExcluded(configs.excludedBoards, currentBoard)) return;
-
-  setupNumbers();
+  setupNumbers(isBoardExcluded(configs.excludedBoards, currentBoard));
   setupDialogNumber();
 }
 
@@ -85,13 +83,13 @@ function setupDialogNumber(): void {
   }
 }
 
-function setupNumbers(): void {
+function setupNumbers(isBoardExcluded = false): void {
   document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
     const htmlElement = element as HTMLElement;
     if (htmlElement) {
       htmlElement.innerHTML = formatNumber(getCardNumberFromParent(element), configs.numberFormat);
       htmlElement.style.color = configs.numberColor;
-      htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive);
+      htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive && !isBoardExcluded);
       htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
     }
   });
