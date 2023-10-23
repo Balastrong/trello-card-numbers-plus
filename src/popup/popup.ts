@@ -3,28 +3,28 @@ import '../trelloCardNumberPlus.css';
 import { Configs, configStorage } from '../shared/storage';
 import { formatNumber, isBoardExcluded } from '../shared/utils';
 import { TCNP_NUMBER_CLASS_BOLD } from '../shared/const';
-import Huebee from 'huebee';
+//import Huebee from 'huebee';
 
-new Huebee('#number-color', {
-  saturations: 1,
-  customColors: [
-    '#ff0000',
-    '#ff7f00',
-    '#ffff00',
-    '#7fff00',
-    '#00ff00',
-    '#00ff7f',
-    '#00ffff',
-    '#007fff',
-    '#0000ff',
-    '#7f00ff',
-    '#ff00ff',
-    '#ff0088',
-  ],
-  staticOpen: true,
-}).on('change', () => {
-  updatePreview();
-});
+// new Huebee('#number-color', {
+//   saturations: 1,
+//   customColors: [
+//     '#ff0000',
+//     '#ff7f00',
+//     '#ffff00',
+//     '#7fff00',
+//     '#00ff00',
+//     '#00ff7f',
+//     '#00ffff',
+//     '#007fff',
+//     '#0000ff',
+//     '#7f00ff',
+//     '#ff00ff',
+//     '#ff0088',
+//   ],
+//   staticOpen: true,
+// }).on('change', () => {
+//   updatePreview();
+// });
 
 //#region Configs logic
 function loadConfigs() {

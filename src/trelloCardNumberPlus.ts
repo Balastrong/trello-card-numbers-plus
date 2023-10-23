@@ -26,6 +26,10 @@ configStorage.get(refresh);
 configStorage.listen(refresh);
 setupObserver();
 
+setTimeout(() => {
+  refresh();
+}, 2000);
+
 function getCurrentBoardId() {
   return window.location.pathname.split('/')[2];
 }
@@ -93,12 +97,14 @@ function setupDialogNumber(): void {
 
 function setupNumbers(): void {
   document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
-    const htmlElement = element as HTMLElement;
-    if (htmlElement) {
+    if (element) {
+      const htmlElement = document.createElement('div');
       htmlElement.innerHTML = formatNumber(getCardNumberFromParent(element), configs.numberFormat);
       htmlElement.style.color = configs.numberColor;
       htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive && !isCurrentBoardExcluded);
       htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
+
+      element.prepend(htmlElement);
     }
   });
 }
