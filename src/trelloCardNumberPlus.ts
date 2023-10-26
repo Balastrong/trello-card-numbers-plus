@@ -96,16 +96,22 @@ function setupDialogNumber(): void {
 }
 
 function setupNumbers(): void {
-  document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((element) => {
-    if (element) {
-      const htmlElement = document.createElement('div');
-      htmlElement.innerHTML = formatNumber(getCardNumberFromParent(element), configs.numberFormat);
-      htmlElement.style.color = configs.numberColor;
-      htmlElement.classList.toggle(TCNP_NUMBER_CLASS, configs.cardNumbersActive && !isCurrentBoardExcluded);
-      htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
+  document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((cardParent) => {
+    if (!cardParent) return;
 
-      element.prepend(htmlElement);
-    }
+    const existingElement = cardParent.querySelector('.' + TCNP_NUMBER_CLASS) as HTMLElement;
+
+    const htmlElement = existingElement ?? document.createElement('div');
+
+    htmlElement.innerHTML = formatNumber(getCardNumberFromParent(cardParent), configs.numberFormat);
+    htmlElement.style.color = configs.numberColor;
+    htmlElement.classList.add(TCNP_NUMBER_CLASS);
+    htmlElement.classList.toggle('tcnp-hidden', !configs.cardNumbersActive || isCurrentBoardExcluded);
+    htmlElement.classList.toggle(TCNP_NUMBER_CLASS_BOLD, configs.cardNumbersBold);
+
+    if (existingElement) return;
+
+    cardParent.prepend(htmlElement);
   });
 }
 

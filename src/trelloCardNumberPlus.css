@@ -1,11 +1,12 @@
-.tcnp-card-number {
-  display: inline !important;
+.tcnp-short-card-number {
+  display: inline;
+  margin-right: 0.3em;
 }
 
-.tcnp-card-number {
-  margin-right: 0.3em !important;
+.tcnp-hidden {
+  display: none !important;
 }
 
-.tcnp-card-number-bold {
+.tcnp-bold {
   font-weight: bold;
 }
