@@ -1,6 +1,6 @@
 //#region Trello Card Numbers Plus Constants
-export const TCNP_NUMBER_CLASS = 'tcnp-card-number';
-export const TCNP_NUMBER_CLASS_BOLD = TCNP_NUMBER_CLASS + '-bold';
+export const TCNP_NUMBER_CLASS = 'tcnp-short-card-number';
+export const TCNP_NUMBER_CLASS_BOLD = 'tcnp-bold';
 export const TCNP_NUMBER_CLASS_SELECTOR = '.' + TCNP_NUMBER_CLASS;
 export const TCNP_NUMBER_FORMAT_PLACEHOLDER = '%0';
 //#endregion
