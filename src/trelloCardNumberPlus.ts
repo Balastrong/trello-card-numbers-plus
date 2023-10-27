@@ -1,22 +1,21 @@
 import {
+  CARD_COUNTER_SELECTOR,
   CARD_SHORT_ID_SELECTOR,
   CARD_TITLE_SELECTOR,
-  CARD_COUNTER_SELECTOR,
   TCNP_NUMBER_CLASS,
   TCNP_NUMBER_CLASS_BOLD,
   TCNP_NUMBER_CLASS_SELECTOR,
 } from './shared/const';
+import { Configs, configStorage } from './shared/storage';
 import {
   formatNumber,
   getCardNumberFromParent,
   getCardNumberFromURL,
-  isCard,
-  isDialogClosed,
-  isDroppedCard,
   isAddedCard,
   isBoardExcluded,
+  isDialogClosed,
+  isDialogOpened,
 } from './shared/utils';
-import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
 
 let configs: Configs = new Configs();
@@ -52,21 +51,17 @@ function setupObserver(): void {
 
       // Board has been changed
       if (element.id === 'board') {
-        refresh();
+        //refresh();
       }
 
       if (!element?.classList?.length) return;
 
-      if (
-        (isCard(element) && (mutation.addedNodes.length > 0 || isDroppedCard(element, mutation))) ||
-        isDialogClosed(element, mutation) ||
-        isAddedCard(element, mutation)
-      ) {
+      if (isDialogClosed(element, mutation) || isAddedCard(mutation)) {
         setupCounters();
         setupNumbers();
       }
 
-      if (element.classList.contains('card-detail-window')) {
+      if (isDialogOpened(element)) {
         setupDialogNumber();
       }
     });
@@ -115,6 +110,7 @@ function setupNumbers(): void {
   });
 }
 
+// TODO: Rewrite as the selector is no longer valid, we need to count the cards in the list
 function setupCounters(): void {
   document.querySelectorAll(CARD_COUNTER_SELECTOR).forEach((element) => {
     const htmlElement = element as HTMLElement;

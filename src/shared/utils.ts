@@ -1,19 +1,15 @@
 import { TCNP_NUMBER_FORMAT_PLACEHOLDER } from './const';
 
-export function isCard(element: Element): boolean {
-  return element.classList.contains('list-card');
-}
-
-export function isDroppedCard(element: Element, mutation: MutationRecord): boolean {
-  return (!element.classList.contains('ui-droppable') && mutation.oldValue?.includes('ui-droppable')) || false;
-}
-
 export function isDialogClosed(element: Element, mutation: MutationRecord): boolean {
-  return element.classList.contains('window-wrapper') && mutation.removedNodes.length > 0;
+  return mutation.removedNodes.length > 0 && element.classList.contains('js-fill-card-detail-desc');
 }
 
-export function isAddedCard(element: Element, mutation: MutationRecord): boolean {
-  return mutation.removedNodes?.length > 0 && element.classList.contains('js-menu-action-list');
+export function isDialogOpened(element: Element): boolean {
+  return element.classList.contains('card-detail-window');
+}
+
+export function isAddedCard(mutation: MutationRecord): boolean {
+  return mutation.target.nodeName === 'OL' && mutation.addedNodes[0]?.nodeName === 'LI';
 }
 
 export function formatNumber(cardNumber: number, numberFormat: string): string {

@@ -7,6 +7,8 @@ export const TCNP_NUMBER_FORMAT_PLACEHOLDER = '%0';
 
 //#region Trello Constants
 export const CARD_TITLE_SELECTOR = '#js-dialog-title';
+// TODO: We should find a better selector for this
 export const CARD_SHORT_ID_SELECTOR = '[data-testid=card-name]';
+/** @deprecated this no longer exists */
 export const CARD_COUNTER_SELECTOR = '.list-header-num-cards';
 //#endregion
