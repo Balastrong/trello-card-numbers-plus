@@ -13,6 +13,8 @@
 
 # Trello Card Numbers Plus
 
+> NOTE: This still works after Trello changes of October 2023! 🚀
+
 A fully customizable Chrome extension show card ID and counting cards in each list.
 
 With card IDs it's much easier to refer to a specific card with your team and in commit messages.
@@ -28,6 +30,7 @@ This extension provides full customization of the card numbers, have a look!
 - Show card ID
 - Customize card ID format
 - Toggle card ID display
+- Toggle cards count display
 - Count cards for each list
 - Configs live reload
 - Customize colors
@@ -35,7 +38,6 @@ This extension provides full customization of the card numbers, have a look!
 
 ### Planned features
 
-- Toggle cards count display
 - _...you can suggest a new feature!_
 
 ## Install from Chrome Web Store

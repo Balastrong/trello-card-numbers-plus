@@ -1,22 +1,22 @@
 import {
   CARD_SHORT_ID_SELECTOR,
   CARD_TITLE_SELECTOR,
-  CARD_COUNTER_SELECTOR,
+  LIST_HEADER_SELECTOR,
+  TCNP_LIST_COUNTER_CLASS,
   TCNP_NUMBER_CLASS,
   TCNP_NUMBER_CLASS_BOLD,
   TCNP_NUMBER_CLASS_SELECTOR,
 } from './shared/const';
+import { Configs, configStorage } from './shared/storage';
 import {
   formatNumber,
   getCardNumberFromParent,
   getCardNumberFromURL,
-  isCard,
-  isDialogClosed,
-  isDroppedCard,
   isAddedCard,
   isBoardExcluded,
+  isDialogClosed,
+  isDialogOpened,
 } from './shared/utils';
-import { Configs, configStorage } from './shared/storage';
 import './trelloCardNumberPlus.css';
 
 let configs: Configs = new Configs();
@@ -50,23 +50,14 @@ function setupObserver(): void {
     mutations.forEach((mutation) => {
       const element = mutation.target as HTMLElement;
 
-      // Board has been changed
-      if (element.id === 'board') {
-        refresh();
-      }
-
       if (!element?.classList?.length) return;
 
-      if (
-        (isCard(element) && (mutation.addedNodes.length > 0 || isDroppedCard(element, mutation))) ||
-        isDialogClosed(element, mutation) ||
-        isAddedCard(element, mutation)
-      ) {
+      if (isDialogClosed(element, mutation) || isAddedCard(mutation)) {
         setupCounters();
         setupNumbers();
       }
 
-      if (element.classList.contains('card-detail-window')) {
+      if (isDialogOpened(element)) {
         setupDialogNumber();
       }
     });
@@ -116,10 +107,18 @@ function setupNumbers(): void {
 }
 
 function setupCounters(): void {
-  document.querySelectorAll(CARD_COUNTER_SELECTOR).forEach((element) => {
-    const htmlElement = element as HTMLElement;
-    if (!htmlElement) return;
+  document.querySelectorAll(LIST_HEADER_SELECTOR).forEach((listHeader) => {
+    if (!listHeader) return;
 
-    htmlElement.classList.toggle('hide', !configs.cardCountersActive);
+    const existingElement = listHeader.querySelector('.' + TCNP_LIST_COUNTER_CLASS) as HTMLElement;
+
+    const htmlElement = existingElement ?? document.createElement('span');
+    htmlElement.innerHTML = `${10} cards`;
+    htmlElement.classList.add(TCNP_LIST_COUNTER_CLASS);
+    htmlElement.classList.toggle('tcnp-hidden', !configs.cardCountersActive || isCurrentBoardExcluded);
+
+    if (existingElement) return;
+
+    listHeader.append(htmlElement);
   });
 }
