@@ -1,7 +1,8 @@
 import {
-  CARD_COUNTER_SELECTOR,
   CARD_SHORT_ID_SELECTOR,
   CARD_TITLE_SELECTOR,
+  LIST_HEADER_SELECTOR,
+  TCNP_LIST_COUNTER_CLASS,
   TCNP_NUMBER_CLASS,
   TCNP_NUMBER_CLASS_BOLD,
   TCNP_NUMBER_CLASS_SELECTOR,
@@ -48,11 +49,6 @@ function setupObserver(): void {
   const observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation) => {
       const element = mutation.target as HTMLElement;
-
-      // Board has been changed
-      if (element.id === 'board') {
-        //refresh();
-      }
 
       if (!element?.classList?.length) return;
 
@@ -110,12 +106,19 @@ function setupNumbers(): void {
   });
 }
 
-// TODO: Rewrite as the selector is no longer valid, we need to count the cards in the list
 function setupCounters(): void {
-  document.querySelectorAll(CARD_COUNTER_SELECTOR).forEach((element) => {
-    const htmlElement = element as HTMLElement;
-    if (!htmlElement) return;
+  document.querySelectorAll(LIST_HEADER_SELECTOR).forEach((listHeader) => {
+    if (!listHeader) return;
 
-    htmlElement.classList.toggle('hide', !configs.cardCountersActive);
+    const existingElement = listHeader.querySelector('.' + TCNP_LIST_COUNTER_CLASS) as HTMLElement;
+
+    const htmlElement = existingElement ?? document.createElement('span');
+    htmlElement.innerHTML = `${10} cards`;
+    htmlElement.classList.add(TCNP_LIST_COUNTER_CLASS);
+    htmlElement.classList.toggle('tcnp-hidden', !configs.cardCountersActive || isCurrentBoardExcluded);
+
+    if (existingElement) return;
+
+    listHeader.append(htmlElement);
   });
 }
