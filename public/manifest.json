@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Trello Card Numbers Plus [2023 Update]",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Adds card numbers on Trello and more! Updated October 2023",
   "icons": {
     "16": "icons/icon_16.png",
