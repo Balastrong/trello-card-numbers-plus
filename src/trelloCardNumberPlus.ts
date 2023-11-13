@@ -16,6 +16,7 @@ import {
   isBoardExcluded,
   isDialogClosed,
   isDialogOpened,
+  isRemovedCard,
 } from './shared/utils';
 import './trelloCardNumberPlus.css';
 
@@ -59,6 +60,10 @@ function setupObserver(): void {
 
       if (isDialogOpened(element)) {
         setupDialogNumber();
+      }
+
+      if (isRemovedCard(mutation)) {
+        setupCounters();
       }
     });
   });
