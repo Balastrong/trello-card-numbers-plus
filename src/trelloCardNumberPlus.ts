@@ -111,9 +111,10 @@ function setupCounters(): void {
     if (!listHeader) return;
 
     const existingElement = listHeader.querySelector('.' + TCNP_LIST_COUNTER_CLASS) as HTMLElement;
+    const cardsCounter = listHeader.parentElement?.querySelectorAll('li')?.length ?? NaN;
 
     const htmlElement = existingElement ?? document.createElement('span');
-    htmlElement.innerHTML = `${10} cards`;
+    htmlElement.innerHTML = isNaN(cardsCounter) ? '' : `${cardsCounter} cards`;
     htmlElement.classList.add(TCNP_LIST_COUNTER_CLASS);
     htmlElement.classList.toggle('tcnp-hidden', !configs.cardCountersActive || isCurrentBoardExcluded);
 
