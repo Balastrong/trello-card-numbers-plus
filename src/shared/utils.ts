@@ -12,6 +12,10 @@ export function isAddedCard(mutation: MutationRecord): boolean {
   return mutation.target.nodeName === 'OL' && mutation.addedNodes[0]?.nodeName === 'LI';
 }
 
+export function isRemovedCard(mutation: MutationRecord): boolean {
+  return mutation.target.nodeName === 'OL' && mutation.removedNodes[0]?.nodeName === 'LI';
+}
+
 export function formatNumber(cardNumber: number, numberFormat: string): string {
   if (isNaN(cardNumber)) return '';
 
