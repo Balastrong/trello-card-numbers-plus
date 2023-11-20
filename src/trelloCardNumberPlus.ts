@@ -27,10 +27,6 @@ configStorage.get(refresh);
 configStorage.listen(refresh);
 setupObserver();
 
-setTimeout(() => {
-  refresh();
-}, 2000);
-
 function getCurrentBoardId() {
   return window.location.pathname.split('/')[2];
 }

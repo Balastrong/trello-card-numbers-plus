@@ -9,7 +9,7 @@ export function isDialogOpened(element: Element): boolean {
 }
 
 export function isAddedCard(mutation: MutationRecord): boolean {
-  return mutation.target.nodeName === 'OL' && mutation.addedNodes[0]?.nodeName === 'LI';
+  return !!(mutation.addedNodes[0] as HTMLElement)?.querySelector('[data-testid=card-name]');
 }
 
 export function isRemovedCard(mutation: MutationRecord): boolean {
