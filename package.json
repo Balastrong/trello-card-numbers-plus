@@ -1,6 +1,6 @@
 {
   "name": "trello-card-numbers-plus",
-  "version": "1.2.3",
+  "version": "1.3.3",
   "description": "Adds card numbers on Trello and more!",
   "private": true,
   "scripts": {
