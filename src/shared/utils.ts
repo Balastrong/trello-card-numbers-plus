@@ -38,3 +38,18 @@ export function isBoardExcluded(excludedBoards: string, boardId: string) {
   const excludedBoardsedBoards = excludedBoards.split(';').map((ids) => ids.trim());
   return excludedBoardsedBoards.includes(boardId);
 }
+
+export function debounce<T extends (...args: unknown[]) => unknown>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeoutId: NodeJS.Timeout;
+
+  return function (this: unknown, ...args: Parameters<T>): void {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}

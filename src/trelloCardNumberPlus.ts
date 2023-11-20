@@ -9,6 +9,7 @@ import {
 } from './shared/const';
 import { Configs, configStorage } from './shared/storage';
 import {
+  debounce,
   formatNumber,
   getCardNumberFromParent,
   getCardNumberFromURL,
@@ -38,7 +39,7 @@ function refresh(updatedConfigs?: Configs): void {
   isCurrentBoardExcluded = isBoardExcluded(configs.excludedBoards, getCurrentBoardId());
 
   setupCounters();
-  setupNumbers();
+  debouncedSetupNumbers();
   setupDialogNumber();
 }
 
@@ -48,10 +49,9 @@ function setupObserver(): void {
       const element = mutation.target as HTMLElement;
 
       if (!element?.classList?.length) return;
-      console.log(mutation);
       if (isDialogClosed(element, mutation) || isAddedCard(mutation)) {
-        setupCounters();
-        setupNumbers();
+        debouncedSetupCounters();
+        debouncedSetupNumbers();
       }
 
       if (isDialogOpened(element)) {
@@ -59,7 +59,7 @@ function setupObserver(): void {
       }
 
       if (isRemovedCard(mutation)) {
-        setupCounters();
+        debouncedSetupCounters();
       }
     });
   });
@@ -124,3 +124,6 @@ function setupCounters(): void {
     listHeader.append(htmlElement);
   });
 }
+
+const debouncedSetupCounters = debounce(setupCounters, 100);
+const debouncedSetupNumbers = debounce(setupNumbers, 100);
