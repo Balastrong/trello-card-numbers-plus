@@ -9,7 +9,9 @@ export function isDialogOpened(element: Element): boolean {
 }
 
 export function isAddedCard(mutation: MutationRecord): boolean {
-  return mutation.target.nodeName === 'OL' && mutation.addedNodes[0]?.nodeName === 'LI';
+  if (!(mutation.addedNodes[0] instanceof HTMLElement)) return false;
+
+  return !!mutation.addedNodes[0].querySelector('[data-testid=card-name]');
 }
 
 export function isRemovedCard(mutation: MutationRecord): boolean {
@@ -35,4 +37,19 @@ export function getCardNumberFromParent(element: Element): number {
 export function isBoardExcluded(excludedBoards: string, boardId: string) {
   const excludedBoardsedBoards = excludedBoards.split(';').map((ids) => ids.trim());
   return excludedBoardsedBoards.includes(boardId);
+}
+
+export function debounce<T extends (...args: unknown[]) => unknown>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeoutId: NodeJS.Timeout;
+
+  return function (this: unknown, ...args: Parameters<T>): void {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
 }
