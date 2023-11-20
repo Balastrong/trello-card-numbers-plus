@@ -9,7 +9,9 @@ export function isDialogOpened(element: Element): boolean {
 }
 
 export function isAddedCard(mutation: MutationRecord): boolean {
-  return !!(mutation.addedNodes[0] as HTMLElement)?.querySelector('[data-testid=card-name]');
+  if (!(mutation.addedNodes[0] instanceof HTMLElement)) return false;
+
+  return !!mutation.addedNodes[0].querySelector('[data-testid=card-name]');
 }
 
 export function isRemovedCard(mutation: MutationRecord): boolean {

@@ -48,7 +48,7 @@ function setupObserver(): void {
       const element = mutation.target as HTMLElement;
 
       if (!element?.classList?.length) return;
-
+      console.log(mutation);
       if (isDialogClosed(element, mutation) || isAddedCard(mutation)) {
         setupCounters();
         setupNumbers();
