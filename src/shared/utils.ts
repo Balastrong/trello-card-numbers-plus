@@ -8,14 +8,23 @@ export function isDialogOpened(element: Element): boolean {
   return element.classList.contains('card-detail-window');
 }
 
-export function isAddedCard(mutation: MutationRecord): boolean {
-  if (!(mutation.addedNodes[0] instanceof HTMLElement)) return false;
+export function isCardLinkUpdated(mutation: MutationRecord): boolean {
+  if (mutation.type !== 'attributes') return false;
+  if (mutation.attributeName !== 'href') return false;
+  if (!(mutation.target instanceof HTMLAnchorElement)) return false;
 
-  return !!mutation.addedNodes[0].querySelector('[data-testid=card-name]');
+  return !!mutation.target.querySelector('[data-testid=card-name]');
 }
 
 export function isRemovedCard(mutation: MutationRecord): boolean {
   return mutation.target.nodeName === 'OL' && mutation.removedNodes[0]?.nodeName === 'LI';
+}
+
+export function isCardListItemAdded(mutation: MutationRecord): boolean {
+  if (mutation.type !== 'childList') return false;
+  if (mutation.target.nodeName !== 'OL') return false;
+
+  return Array.from(mutation.addedNodes).some((node) => node.nodeName === 'LI');
 }
 
 export function formatNumber(cardNumber: number, numberFormat: string): string {

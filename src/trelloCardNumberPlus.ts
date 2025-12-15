@@ -9,12 +9,12 @@ import {
 } from './shared/const';
 import { Configs, configStorage } from './shared/storage';
 import {
-  debounce,
   formatNumber,
   getCardNumberFromParent,
   getCardNumberFromURL,
-  isAddedCard,
   isBoardExcluded,
+  isCardListItemAdded,
+  isCardLinkUpdated,
   isDialogClosed,
   isDialogOpened,
   isRemovedCard,
@@ -23,6 +23,33 @@ import './trelloCardNumberPlus.css';
 
 let configs: Configs = new Configs();
 let isCurrentBoardExcluded = false;
+let settleIntervalId: number | undefined;
+let settleStopTimeoutId: number | undefined;
+
+function rescanBoard(): void {
+  setupCounters();
+  setupNumbers();
+}
+
+function startSettleRescan(): void {
+  rescanBoard();
+
+  if (!settleIntervalId) {
+    settleIntervalId = window.setInterval(rescanBoard, 100);
+  }
+
+  if (settleStopTimeoutId) {
+    window.clearTimeout(settleStopTimeoutId);
+  }
+
+  settleStopTimeoutId = window.setTimeout(() => {
+    if (settleIntervalId) {
+      window.clearInterval(settleIntervalId);
+      settleIntervalId = undefined;
+    }
+    settleStopTimeoutId = undefined;
+  }, 2000);
+}
 
 configStorage.get(refresh);
 configStorage.listen(refresh);
@@ -39,27 +66,29 @@ function refresh(updatedConfigs?: Configs): void {
   isCurrentBoardExcluded = isBoardExcluded(configs.excludedBoards, getCurrentBoardId());
 
   setupCounters();
-  debouncedSetupNumbers();
+  setupNumbers();
   setupDialogNumber();
 }
 
 function setupObserver(): void {
   const observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation) => {
-      const element = mutation.target as HTMLElement;
+      const target = mutation.target;
+      if (!(target instanceof Element)) return;
 
-      if (!element?.classList?.length) return;
-      if (isDialogClosed(element, mutation) || isAddedCard(mutation)) {
-        debouncedSetupCounters();
-        debouncedSetupNumbers();
+      const cardLinkUpdated = isCardLinkUpdated(mutation);
+      const listItemAdded = isCardListItemAdded(mutation);
+
+      if (isDialogClosed(target, mutation) || cardLinkUpdated || listItemAdded) {
+        startSettleRescan();
       }
 
-      if (isDialogOpened(element)) {
+      if (isDialogOpened(target)) {
         setupDialogNumber();
       }
 
       if (isRemovedCard(mutation)) {
-        debouncedSetupCounters();
+        setupCounters();
       }
     });
   });
@@ -91,11 +120,14 @@ function setupNumbers(): void {
   document.querySelectorAll(CARD_SHORT_ID_SELECTOR).forEach((cardParent) => {
     if (!cardParent) return;
 
+    const cardNumber = getCardNumberFromParent(cardParent);
+    if (isNaN(cardNumber)) return;
+
     const existingElement = cardParent.querySelector('.' + TCNP_NUMBER_CLASS) as HTMLElement;
 
     const htmlElement = existingElement ?? document.createElement('div');
 
-    htmlElement.innerHTML = formatNumber(getCardNumberFromParent(cardParent), configs.numberFormat);
+    htmlElement.innerHTML = formatNumber(cardNumber, configs.numberFormat);
     htmlElement.style.color = configs.numberColor;
     htmlElement.classList.add(TCNP_NUMBER_CLASS);
     htmlElement.classList.toggle('tcnp-hidden', !configs.cardNumbersActive || isCurrentBoardExcluded);
@@ -124,6 +156,3 @@ function setupCounters(): void {
     listHeader.append(htmlElement);
   });
 }
-
-const debouncedSetupCounters = debounce(setupCounters, 100);
-const debouncedSetupNumbers = debounce(setupNumbers, 100);
