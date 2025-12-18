@@ -4,9 +4,8 @@
 }
 
 .tcnp-list-counter {
-  margin-top: -8px;
-  margin-bottom: 8px;
-  margin-left: 12px;
+  align-self: center;
+  margin: 0 12px;
 }
 
 .tcnp-hidden {
