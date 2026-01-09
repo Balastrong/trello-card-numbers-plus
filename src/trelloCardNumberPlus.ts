@@ -2,6 +2,7 @@ import {
   CARD_SHORT_ID_SELECTOR,
   CARD_TITLE_SELECTOR,
   LIST_HEADER_SELECTOR,
+  HEADER_DOTS_BUTTON_SELECTOR,
   TCNP_LIST_COUNTER_CLASS,
   TCNP_NUMBER_CLASS,
   TCNP_NUMBER_CLASS_BOLD,
@@ -153,6 +154,13 @@ function setupCounters(): void {
 
     if (existingElement) return;
 
-    listHeader.append(htmlElement);
+    const dotsButton = listHeader.querySelector(HEADER_DOTS_BUTTON_SELECTOR);
+    if (dotsButton) {
+      // If the "..." button is present, insert the counter right before it
+      dotsButton.before(htmlElement);
+    } else {
+      // Otherwise, just append it to the end of the header
+      listHeader.append(htmlElement);
+    }
   });
 }
